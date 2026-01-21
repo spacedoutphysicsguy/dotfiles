@@ -34,6 +34,7 @@ vim.keymap.set("n", "<leader>sl", ":source .session.vim<CR>", { noremap = true, 
 -- quit file
 vim.keymap.set("n", "<leader>qq", "<cmd> q <CR>", opts)
 vim.keymap.set("n", "<leader>qa", "<cmd> qa <CR>", opts)
+vim.keymap.set("n", "<leader>qn", "<cmd> q! <CR>", opts)
 
 -- delete single character without copying into register
 vim.keymap.set("n", "x", '"_x', opts)

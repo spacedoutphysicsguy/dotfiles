@@ -5,17 +5,18 @@ return {
 	opts = {
 		delay = 0,
 		preset = "helix",
-		-- win = {
-		--   border = {
-		--     { '┌', 'FloatBorder' },
-		--     { '─', 'FloatBorder' },
-		--     { '┐', 'FloatBorder' },
-		--     { '│', 'FloatBorder' },
-		--     { '┘', 'FloatBorder' },
-		--     { '─', 'FloatBorder' },
-		--     { '└', 'FloatBorder' },
-		--     { '│', 'FloatBorder' },
-		--   },
-		-- },
+		icons = {
+			mappings = true,
+		},
+		spec = {
+			{ "<leader>f", group = "Find" },
+			{ "<leader>g", group = "Git" },
+			{ "<leader>l", group = "LSP", icon = "󰚩" },
+			{ "<leader>d", group = "Diagnostics" },
+			{ "<leader>q", group = "Quit" },
+			{ "<leader>s", group = "Save", icon = "💾" },
+			{ "<leader>r", group = "Iron", icon = "⛓️" },
+			{ "<leader>t", group = "Tab" },
+		},
 	},
 }
