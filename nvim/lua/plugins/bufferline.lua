@@ -8,8 +8,8 @@ return {
 		require("bufferline").setup({
 			options = {
 				mode = "buffers",
-				themable = true,
 				numbers = "none",
+				themable = true,
 				close_command = "Bdelete! %d",
 				right_mouse_command = "Bdelete! %d",
 				left_mouse_command = "buffer %d",
@@ -47,7 +47,6 @@ return {
 				-- 		end
 				-- 		return parent .. " / " .. buf.name
 				-- 	end,
-				-- Removed: maximum_length = 15 (Avoids conflict with tab_size)
 			},
 			highlights = {
 				separator = {

@@ -38,30 +38,31 @@ return {
 					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "lSP: " .. desc })
 				end
 
+				local builtin = require("telescope.builtin")
 				-- Jump to the definition of the word under your cursor.
 				--  This is where a variable was first declared, or where a function is defined, etc.
 				--  To jump back, press <C-T>.
-				map("<leader>ld", require("telescope.builtin").lsp_definitions, "Goto [D]efinition")
+				map("<leader>ld", builtin.lsp_definitions, "Goto [D]efinition")
 
 				-- Find references for the word under your cursor.
-				map("<leader>lr", require("telescope.builtin").lsp_references, "Goto [R]eferences")
+				map("<leader>lr", builtin.lsp_references, "Goto [R]eferences")
 
 				-- Jump to the implementation of the word under your cursor.
 				--  Useful when your language has ways of declaring types without an actual implementation.
-				map("<leader>li", require("telescope.builtin").lsp_implementations, "Goto [I]mplementation")
+				map("<leader>li", builtin.lsp_implementations, "Goto [I]mplementation")
 
 				-- Jump to the type of the word under your cursor.
 				--  Useful when you're not sure what type a variable is and you want to see
 				--  the definition of its *type*, not where it was *defined*.
-				map("<leader>lD", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+				map("<leader>lD", builtin.lsp_type_definitions, "Type [D]efinition")
 
 				-- Fuzzy find all the symbols in your current document.
 				--  Symbols are things like variables, functions, types, etc.
-				map("<leader>fds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+				map("<leader>fds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
 
 				-- Fuzzy find all the symbols in your current workspace
 				--  Similar to document symbols, except searches over your whole project.
-				map("<leader>fws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+				map("<leader>fws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 				-- Rename the variable under your cursor
 				--  Most Language Servers support renaming across files, etc.
