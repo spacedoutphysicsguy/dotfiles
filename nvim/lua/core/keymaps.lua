@@ -18,15 +18,28 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set("n", "<Esc>", ":noh<CR>", opts)
 
 -- save file
-vim.keymap.set("n", "<leader>w", "<cmd> w <CR>", opts)
-vim.keymap.set("n", "<leader>wa", "<cmd> wa <CR>", opts)
-vim.keymap.set("n", "<leader>wn", "<cmd>noautocmd w <CR>", opts)
+vim.keymap.set("n", "<leader>sf", "<cmd> w <CR>", { desc = "[S]ave [F]ile" })
+vim.keymap.set("n", "<leader>sa", "<cmd> wa <CR>", { desc = "[S]save [A]ll" })
+vim.keymap.set("n", "<leader>sn", "<cmd>noautocmd w <CR>", { desc = "[S]ave without formatting" })
+vim.keymap.set("n", "<leader>sq", function()
+	vim.cmd("wa")
+	vim.cmd(":mksession! .session.vim")
+	vim.cmd("qa")
+end, { desc = "[S]ave and [Q]uit" })
+
+-- Save and load session
+vim.keymap.set("n", "<leader>ss", ":mksession! .session.vim<CR>", { noremap = true, silent = false })
+vim.keymap.set("n", "<leader>sl", ":source .session.vim<CR>", { noremap = true, silent = false })
 
 -- quit file
-vim.keymap.set("n", "<C-q>", "<cmd> q <CR>", opts)
+vim.keymap.set("n", "<leader>qq", "<cmd> q <CR>", opts)
+vim.keymap.set("n", "<leader>qa", "<cmd> qa <CR>", opts)
 
 -- delete single character without copying into register
 vim.keymap.set("n", "x", '"_x', opts)
+
+-- delete line without copying into register
+vim.keymap.set({ "n", "v" }, "dx", '"_d', { desc = "[D]elete [X]without saving" })
 
 -- Vertical scroll and center
 vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
@@ -72,7 +85,7 @@ vim.keymap.set("n", "<leader>tn", ":tabn<CR>", opts) --  go to next tab
 vim.keymap.set("n", "<leader>tp", ":tabp<CR>", opts) --  go to previous tab
 
 -- Toggle line wrapping
-vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<CR>", opts)
+-- vim.keymap.set("n", "<leader>lw", "<cmd>set wrap!<CR>", opts)
 
 -- Press jk fast to exit insert mode
 -- vim.keymap.set('i', 'jk', '<ESC>', opts)
@@ -89,7 +102,7 @@ vim.keymap.set("v", "<A-k>", ":m .-2<CR>==", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 
--- Replace word under cursor
+-- Replace word under cursor and add to search register
 vim.keymap.set("n", "<leader>j", "*``cgn", opts)
 
 -- Explicitly yank to system clipboard (highlighted and entire row)
@@ -107,7 +120,7 @@ vim.keymap.set("n", "<leader>do", function()
 	else
 		vim.diagnostic.enable(false)
 	end
-end)
+end, { desc = "Toggle [D]iagnostics" })
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "dp", function()
@@ -118,9 +131,5 @@ vim.keymap.set("n", "dn", function()
 	vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Go to next diagnostic message" })
 
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set("n", "<leader>dc", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-
--- Save and load session
-vim.keymap.set("n", "<leader>ss", ":mksession! .session.vim<CR>", { noremap = true, silent = false })
-vim.keymap.set("n", "<leader>sl", ":source .session.vim<CR>", { noremap = true, silent = false })
