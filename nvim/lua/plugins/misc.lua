@@ -49,4 +49,13 @@ return {
 			{ "<leader>vs", "<cmd>VenvSelect<cr>" },
 		},
 	},
+	-- Adding some surround motions
+	{
+		{
+			"kylechui/nvim-surround",
+			version = "*", -- use latest stable tag
+			event = "VeryLazy",
+			config = true, -- uses default setup()
+		},
+	},
 }

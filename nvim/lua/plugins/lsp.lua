@@ -4,14 +4,14 @@ return {
 		-- Automatically install LSPs and related tools to stdpath for Neovim
 		{ "mason-org/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 		-- mason-lspconfig:
-		-- - Bridges the gap between LSP config names (e.g. "lua_ls") and actual Mason package names (e.g. "lua-language-server").
-		-- - Used here only to allow specifying language servers by their LSP name (like "lua_ls") in `ensure_installed`.
+		-- - Bridges the gap between LSP config names (e.g. "<leader>lua_ls") and actual Mason package names (e.g. "<leader>lua-language-server").
+		-- - Used here only to allow specifying language servers by their LSP name (like "<leader>lua_ls") in `ensure_installed`.
 		-- - It does not auto-configure servers — we use vim.lsp.config() + vim.lsp.enable() explicitly for full control.
 		"mason-org/mason-lspconfig.nvim",
 		-- mason-tool-installer:
 		-- - Installs LSPs, linters, formatters, etc. by their Mason package name.
 		-- - We use it to ensure all desired tools are present.
-		-- - The `ensure_installed` list works with mason-lspconfig to resolve LSP names like "lua_ls".
+		-- - The `ensure_installed` list works with mason-lspconfig to resolve LSP names like "<leader>lua_ls".
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 		-- Useful status updates for LSP.
@@ -29,47 +29,47 @@ return {
 		"saghen/blink.cmp",
 	},
 	config = function()
-		vim.api.nvim_create_autocmd("LspAttach", {
+		vim.api.nvim_create_autocmd("lspAttach", {
 			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 			-- Create a function that lets us more easily define mappings specific LSP related items.
 			-- It sets the mode, buffer and description for us each time.
 			callback = function(event)
 				local map = function(keys, func, desc)
-					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "lSP: " .. desc })
 				end
 
 				-- Jump to the definition of the word under your cursor.
 				--  This is where a variable was first declared, or where a function is defined, etc.
 				--  To jump back, press <C-T>.
-				map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+				map("<leader>ld", require("telescope.builtin").lsp_definitions, "Goto [D]efinition")
 
 				-- Find references for the word under your cursor.
-				map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+				map("<leader>lr", require("telescope.builtin").lsp_references, "Goto [R]eferences")
 
 				-- Jump to the implementation of the word under your cursor.
 				--  Useful when your language has ways of declaring types without an actual implementation.
-				map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+				map("<leader>li", require("telescope.builtin").lsp_implementations, "Goto [I]mplementation")
 
 				-- Jump to the type of the word under your cursor.
 				--  Useful when you're not sure what type a variable is and you want to see
 				--  the definition of its *type*, not where it was *defined*.
-				map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+				map("<leader>lD", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 
 				-- Fuzzy find all the symbols in your current document.
 				--  Symbols are things like variables, functions, types, etc.
-				map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+				map("<leader>fds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 
 				-- Fuzzy find all the symbols in your current workspace
 				--  Similar to document symbols, except searches over your whole project.
-				map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+				map("<leader>fws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 				-- Rename the variable under your cursor
 				--  Most Language Servers support renaming across files, etc.
-				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+				map("<leader>lcn", vim.lsp.buf.rename, "[C]hange [N]ame")
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
-				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+				map("<leader>lca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
 				-- Opens a popup that displays documentation about the word under your cursor
 				--  See `:help K` for why this keymap
@@ -77,7 +77,7 @@ return {
 				map("L", vim.lsp.buf.signature_help, "Signature Help")
 				-- WARN: This is not Goto Definition, this is Goto Declaration.
 				--  For example, in C this would take you to the header
-				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+				map("<leader>lD", vim.lsp.buf.declaration, "Goto [D]eclaration")
 
 				map("<leader>lwa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 				map("<leader>lwr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
@@ -104,7 +104,7 @@ return {
 						callback = vim.lsp.buf.clear_references,
 					})
 
-					vim.api.nvim_create_autocmd("LspDetach", {
+					vim.api.nvim_create_autocmd("lspDetach", {
 						group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
 						callback = function(event2)
 							vim.lsp.buf.clear_references()
@@ -116,9 +116,9 @@ return {
 				-- The following code creates a keymap to toggle inlay hints in your
 				-- code, if the language server you are using supports them
 				if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-					map("<leader>th", function()
+					map("<leader>lh", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-					end, "[T]oggle Inlay [H]ints")
+					end, "Toggle Inlay [H]ints")
 				end
 			end,
 		})
@@ -142,7 +142,7 @@ return {
 						completion = {
 							callSnippet = "Replace",
 						},
-						runtime = { version = "LuaJIT" },
+						runtime = { version = "luaJIT" },
 						workspace = {
 							checkThirdParty = false,
 							library = vim.api.nvim_get_runtime_file("", true),
