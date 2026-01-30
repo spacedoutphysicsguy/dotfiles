@@ -66,11 +66,11 @@ return {
 
 				-- Rename the variable under your cursor
 				--  Most Language Servers support renaming across files, etc.
-				map("<leader>lcn", vim.lsp.buf.rename, "[C]hange [N]ame")
+				map("<leader>lc", vim.lsp.buf.rename, "[C]hange Name")
 
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
-				map("<leader>lca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+				map("<leader>la", vim.lsp.buf.code_action, "Code [A]ction")
 				-- Opens a popup that displays documentation about the word under your cursor
 				--  See `:help K` for why this keymap
 				map("K", vim.lsp.buf.hover, "Hover Documentation")

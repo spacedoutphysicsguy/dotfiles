@@ -6,7 +6,9 @@ vim.g.maplocalleader = " "
 
 -- For conciseness
 local opts = { noremap = true, silent = true }
-
+local descopt = function(desc)
+	return vim.tbl_extend("force", opts, { desc = desc })
+end
 -- Disable the spacebar key's default behavior in Normal and Visual modes
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
@@ -40,7 +42,7 @@ vim.keymap.set("n", "<leader>qn", "<cmd> q! <CR>", opts)
 vim.keymap.set("n", "x", '"_x', opts)
 
 -- delete line without copying into register
-vim.keymap.set({ "n", "v" }, "dx", '"_d', { desc = "[D]elete [X]without saving" })
+vim.keymap.set({ "n", "v" }, "dx", '"_d', opts)
 
 -- Vertical scroll and center
 vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
@@ -60,7 +62,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
 vim.keymap.set("n", "<C-i>", "<C-i>", opts) -- to restore jump forward
-vim.keymap.set("n", "<leader>x", ":Bdelete!<CR>", opts) -- close buffer
+vim.keymap.set("n", "<leader>x", ":Bdelete!<CR>", descopt("Delete Buffer")) -- close buffer
 -- vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", opts) -- new buffer
 
 -- Increment/decrement numbers
@@ -71,7 +73,7 @@ vim.keymap.set("n", "<leader>-", "<C-x>", opts) -- decrement
 vim.keymap.set("n", "<leader>v", "<C-w>v", opts) -- split window vertically
 vim.keymap.set("n", "<leader>h", "<C-w>s", opts) -- split window horizontally
 vim.keymap.set("n", "<leader>se", "<C-w>=", opts) -- make split windows equal width & height
-vim.keymap.set("n", "<leader>xs", ":close<CR>", opts) -- close current split window
+vim.keymap.set("n", "<leader>sx", ":close<CR>", opts) -- close current split window
 
 -- Navigate between splits
 vim.keymap.set("n", "<C-k>", ":wincmd k<CR>", opts)

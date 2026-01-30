@@ -28,7 +28,7 @@ return {
 				{ "<leader>w", ":Neotree toggle float<CR>", silent = true, desc = "Float File Explorer" },
 				{ "<leader>e", ":Neotree toggle position=left<CR>", silent = true, desc = "Left File Explorer" },
 				{
-					"<leader>ngs",
+					"<leader>gns",
 					":Neotree float git_status<CR>",
 					silent = true,
 					desc = "Neotree Open Git Status Window",

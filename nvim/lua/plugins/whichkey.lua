@@ -17,6 +17,7 @@ return {
 			{ "<leader>s", group = "Save", icon = "💾" },
 			{ "<leader>r", group = "Iron", icon = "⛓️" },
 			{ "<leader>t", group = "Tab" },
+			{ "<leader>a", group = "Aerial", icon= "󰙅" },
 		},
 	},
 }

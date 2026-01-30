@@ -101,7 +101,7 @@ return {
 		vim.keymap.set("n", "<leader>fgn", builtin.git_bcommits, { desc = "[F]ind in [G]it Commits [N]ow" })
 		vim.keymap.set("n", "<leader>fgb", builtin.git_branches, { desc = "[F]ind in [G]it [B]ranches" })
 		vim.keymap.set("n", "<leader>fgs", builtin.git_status, { desc = "[F]ind in [G]it [S]tatus (diff view)" })
-		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind in [F]iles" })
+		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]ile" })
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind in [H]elp" })
 		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[F]ind current [W]ord" })
 		vim.keymap.set("n", "<leader>fk", builtin.live_grep, { desc = "[F]ind by [G]rep" })
@@ -113,17 +113,17 @@ return {
 				symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Property" },
 			})
 		end, { desc = "[F]ind in LSP document [S]ymbols" })
-		vim.keymap.set("n", "<leader>s/", function()
+		vim.keymap.set("n", "<leader>f/", function()
 			builtin.live_grep({
 				grep_open_files = true,
 				prompt_title = "Live Grep in Open Files",
 			})
-		end, { desc = "[S]earch [/] in Open Files" })
+		end, { desc = "[F]ind in Open Files" })
 		vim.keymap.set("n", "<leader>/", function()
 			-- You can pass additional configuration to telescope to change theme, layout, etc.
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				previewer = false,
 			}))
-		end, { desc = "[/] Fuzzily search in current buffer" })
+		end, { desc = "[/] Fuzzy Find" })
 	end,
 }
