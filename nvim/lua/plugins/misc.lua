@@ -58,4 +58,20 @@ return {
 			config = true, -- uses default setup()
 		},
 	},
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "VeryLazy",
+		opts = {
+			bind = true, -- Mandatory for the floating window
+			handler_opts = {
+				border = "rounded",
+			},
+			hint_prefix = "󰏪 ", -- Use a Nerd Font icon for hints
+			floating_window = true,
+			padding = " ",
+		},
+		config = function(_, opts)
+			require("lsp_signature").setup(opts)
+		end,
+	},
 }
