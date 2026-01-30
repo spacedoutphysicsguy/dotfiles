@@ -37,18 +37,6 @@ return {
 			require("colorizer").setup()
 		end,
 	},
-
-	-- Selector for working with different python venvs
-	{
-		"linux-cultist/venv-selector.nvim",
-		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
-		config = true,
-		event = "VeryLazy",
-		keys = {
-			-- Keymap to open the selector (e.g., Leader + v)
-			{ "<leader>vs", "<cmd>VenvSelect<cr>" },
-		},
-	},
 	-- Adding some surround motions
 	{
 		{
@@ -57,21 +45,5 @@ return {
 			event = "VeryLazy",
 			config = true, -- uses default setup()
 		},
-	},
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "VeryLazy",
-		opts = {
-			bind = true, -- Mandatory for the floating window
-			handler_opts = {
-				border = "rounded",
-			},
-			hint_prefix = "󰏪 ", -- Use a Nerd Font icon for hints
-			floating_window = true,
-			padding = " ",
-		},
-		config = function(_, opts)
-			require("lsp_signature").setup(opts)
-		end,
 	},
 }

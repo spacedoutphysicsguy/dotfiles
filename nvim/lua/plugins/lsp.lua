@@ -1,5 +1,5 @@
 return {
-	"neovim/nvim-lspconfig",
+	lsu("neovim/nvim-lspconfig"),
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for Neovim
 		{ "mason-org/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
@@ -25,10 +25,37 @@ return {
 				},
 			},
 		},
+		-- {
+		-- 	"ray-x/lsp_signature.nvim",
+		-- 	-- event = "VeryLazy",
+		-- 	opts = {
+		-- 		bind = true, -- Mandatory for the floating window
+		-- 		handler_opts = {
+		-- 			border = "rounded",
+		-- 		},
+		-- 		hint_prefix = "󰏪 ", -- Use a Nerd Font icon for hints
+		-- 		floating_window = true,
+		-- 		padding = " ",
+		-- 	},
+		-- 	config = function(_, opts)
+		-- 		require("lsp_signature").setup(opts)
+		-- 	end,
+		-- },
 
+		"ray-x/lsp_signature.nvim",
 		"saghen/blink.cmp",
 	},
 	config = function()
+		require("lsp_signature").setup({
+			bind = true, -- Mandatory for the floating window
+			handler_opts = {
+				border = "rounded",
+			},
+			hint_prefix = "󰏪 ", -- Use a Nerd Font icon for hints
+			floating_window = true,
+			padding = " ",
+		})
+
 		vim.api.nvim_create_autocmd("lspAttach", {
 			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 			-- Create a function that lets us more easily define mappings specific LSP related items.
@@ -157,23 +184,23 @@ return {
 					},
 				},
 			},
-			pylsp = {
-				settings = {
-					pylsp = {
-						plugins = {
-							pyflakes = { enabled = false },
-							pycodestyle = { enabled = false },
-							autopep8 = { enabled = false },
-							yapf = { enabled = false },
-							mccabe = { enabled = false },
-							pylsp_mypy = { enabled = false },
-							pylsp_black = { enabled = false },
-							pylsp_isort = { enabled = false },
-						},
-					},
-				},
-			},
-			-- basedpyright = {
+			-- pylsp = {
+			-- 	settings = {
+			-- 		pylsp = {
+			-- 			plugins = {
+			-- 				pyflakes = { enabled = false },
+			-- 				pycodestyle = { enabled = false },
+			-- 				autopep8 = { enabled = false },
+			-- 				yapf = { enabled = false },
+			-- 				mccabe = { enabled = false },
+			-- 				pylsp_mypy = { enabled = false },
+			-- 				pylsp_black = { enabled = false },
+			-- 				pylsp_isort = { enabled = false },
+			-- 			},
+			-- 		},
+			-- 	},
+			-- },
+			-- -- basedpyright = {
 			--   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
 			--   settings = {
 			--     basedpyright = {
@@ -189,17 +216,18 @@ return {
 			--     },
 			--   },
 			-- },
+			ty = {},
 			ruff = {},
 			jsonls = {},
 			sqlls = {},
 			-- terraformls = {},
 			yamlls = {},
 			bashls = {},
-			dockerls = {},
-			docker_compose_language_service = {},
+			-- dockerls = {},
+			-- docker_compose_language_service = {},
 			-- tailwindcss = {},
 			-- graphql = {},
-			html = { filetypes = { "html", "twig", "hbs" } },
+			-- html = { filetypes = { "html", "twig", "hbs" } },
 			-- cssls = {},
 			ltex = {},
 			texlab = {},
