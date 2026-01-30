@@ -26,6 +26,7 @@ local themes = {
 }
 
 -- Setup plugins
+require("plugins.jupytext").setup()
 require("lazy").setup({
 	require(themes[env_var_nvim_theme]),
 	require("plugins.telescope"),

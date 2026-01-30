@@ -107,10 +107,26 @@ return {
 		},
 	},
 	-- Jupytext to convert .ipynb notebooks to .py files
-	{
-		"goerz/jupytext.nvim",
-		opts = {
-			format = "py:hydrogen",
-		},
-	},
+	-- {
+	-- 	"goerz/jupytext.nvim",
+	-- 	opts = {
+	-- 		jupytext = "jupytext",
+	-- 		format = "py:hydrogen",
+	-- 		update = false,
+	-- 		-- filetype = require("jupytext").get_filetype,
+	-- 		-- new_template = require("jupytext").default_new_template(),
+	-- 		-- sync_patterns = { "*.md", "*.py", "*.jl", "*.R", "*.Rmd", "*.qmd" },
+	-- 		-- autosync = true,
+	-- 		-- handle_url_schemes = true,
+	-- 	},
+	-- },
+
+	-- {
+	-- 	"GCBallesteros/jupytext.nvim",
+	-- 	config = function()
+	-- 		require("jupytext").setup({ style = "hydrogen" })
+	-- 		vim.keymap.set("n", "<leader>rjp", "<cmd>JupytextPair<cr>", { desc = "[J]upytext [P]air" })
+	-- 		vim.keymap.set("n", "<leader>rjs", "<cmd>JupytextSync<cr>", { desc = "[J]upytext [S]ync" })
+	-- 	end,
+	-- },
 }
