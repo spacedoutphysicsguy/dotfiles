@@ -37,6 +37,7 @@ vim.keymap.set("n", "<leader>sl", ":source .session.vim<CR>", { noremap = true, 
 vim.keymap.set("n", "<leader>qq", "<cmd> q <CR>", opts)
 vim.keymap.set("n", "<leader>qa", "<cmd> qa <CR>", opts)
 vim.keymap.set("n", "<leader>qn", "<cmd> q! <CR>", opts)
+vim.keymap.set("n", "<leader>qs", ":call delete(v:this_session)<CR>", { noremap = true, silent = false })
 
 -- delete single character without copying into register
 vim.keymap.set("n", "x", '"_x', opts)
