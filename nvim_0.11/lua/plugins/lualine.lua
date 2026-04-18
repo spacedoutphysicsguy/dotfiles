@@ -1,3 +1,7 @@
+-- Set lualine as statusline
+return {
+  'nvim-lualine/lualine.nvim',
+  config = function()
     -- Adapted from: https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/themes/onedark.lua
     local colors = {
       blue = '#61afef',
@@ -33,11 +37,11 @@
     }
 
     -- Import color theme based on environment variable NVIM_THEME
-    local env_var_nvim_theme = os.getenv 'NVIM_THEME' or 'onedark'
+    local env_var_nvim_theme = os.getenv 'NVIM_THEME' or 'nord'
 
     -- Define a table of themes
     local themes = {
-      onedark = 'onedark',
+      onedark = onedark_theme,
       nord = 'nord',
     }
 
@@ -111,3 +115,5 @@
       tabline = {},
       extensions = { 'fugitive' },
     }
+  end,
+}

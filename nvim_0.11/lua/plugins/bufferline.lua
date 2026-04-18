@@ -1,3 +1,9 @@
+return {
+	"akinsho/bufferline.nvim",
+	dependencies = {
+		"moll/vim-bbye",
+	},
+	config = function()
 		require("bufferline").setup({
 			options = {
 				mode = "buffers",
@@ -51,3 +57,5 @@
 				},
 			},
 		})
+	end,
+}

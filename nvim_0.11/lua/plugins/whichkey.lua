@@ -1,4 +1,8 @@
-	require('which-key').setup({
+return {
+	-- Hints keybinds
+	"folke/which-key.nvim",
+	event = "VeryLazy",
+	opts = {
 		delay = 0,
 		preset = "helix",
 		icons = {
@@ -15,4 +19,5 @@
 			{ "<leader>t", group = "Tab" },
 			{ "<leader>a", group = "Aerial", icon= "󰙅" },
 		},
-})
+	},
+}

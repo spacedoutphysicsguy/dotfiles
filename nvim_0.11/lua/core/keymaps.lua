@@ -30,15 +30,14 @@ vim.keymap.set("n", "<leader>sq", function()
 end, { desc = "[S]ave and [Q]uit" })
 
 -- Save and load session
-vim.keymap.set("n", "<leader>ss", ":mksession! .session.vim<CR>", { noremap = true, silent = false, desc= "[S]ave [S]ession" })
-vim.keymap.set("n", "<leader>sl", ":source .session.vim<CR>", { noremap = true, silent = false , desc= "[L]oad [S]ession"})
+vim.keymap.set("n", "<leader>ss", ":mksession! .session.vim<CR>", { noremap = true, silent = false })
+vim.keymap.set("n", "<leader>sl", ":source .session.vim<CR>", { noremap = true, silent = false })
 
 -- quit file
 vim.keymap.set("n", "<leader>qq", "<cmd> q <CR>", opts)
 vim.keymap.set("n", "<leader>qa", "<cmd> qa <CR>", opts)
 vim.keymap.set("n", "<leader>qn", "<cmd> q! <CR>", opts)
 vim.keymap.set("n", "<leader>qs", ":call delete(v:this_session)<CR>", { noremap = true, silent = false })
-vim.keymap.set("n", "<leader>qr", "<cmd> restart <CR>", opts)
 
 -- delete single character without copying into register
 vim.keymap.set("n", "x", '"_x', opts)
@@ -117,7 +116,7 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- Toggle diagnostics
 local diagnostics_active = true
 
-vim.keymap.set("n", "<leader>df", function()
+vim.keymap.set("n", "<leader>do", function()
 	diagnostics_active = not diagnostics_active
 
 	if diagnostics_active then

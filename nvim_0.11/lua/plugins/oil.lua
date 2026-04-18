@@ -1,4 +1,9 @@
-	opts = 	require("oil").setup({
+return {
+	"stevearc/oil.nvim",
+	-- Optional dependencies
+	-- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+	lazy = false,
+	opts = {
 		-- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
 		default_file_explorer = true,
 		-- Id is automatically added at the beginning, and name at the end
@@ -44,8 +49,9 @@
 		win_options = {
 			wrap = true,
 		},
-	}
-)
-		
-	
-	vim.keymap.set("n", "-", "<cmd>Oil<CR>", { noremap = true, silent = true })
+	},
+	config = function(_, opts)
+		require("oil").setup(opts)
+		vim.keymap.set("n", "-", "<cmd>Oil<CR>", { noremap = true, silent = true })
+	end,
+}

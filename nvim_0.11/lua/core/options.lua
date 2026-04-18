@@ -37,7 +37,6 @@ vim.o.conceallevel = 0 -- so that `` is visible in markdown files
 vim.o.fileencoding = "utf-8" -- the encoding written to a file
 vim.o.cmdheight = 1 -- more space in the neovim command line for displaying messages
 vim.o.autoindent = true -- copy indent from current line when starting new one
--- vim.o.autocomplete = true -- native autocompletion from 0.12 onwards apparently
 vim.opt.shortmess:append("c") -- don't give |ins-completion-menu| messages
 vim.opt.iskeyword:append("-") -- hyphenated words recognized by searches
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode.

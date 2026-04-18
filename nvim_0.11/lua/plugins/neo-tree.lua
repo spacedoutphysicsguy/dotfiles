@@ -1,4 +1,16 @@
-require("window-picker").setup({
+return {
+	"nvim-neo-tree/neo-tree.nvim",
+	event = "VeryLazy",
+	branch = "v3.x",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"MunifTanjim/nui.nvim",
+		"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+		{
+			"s1n7ax/nvim-window-picker",
+			version = "2.*",
+			config = function()
+				require("window-picker").setup({
 					filter_rules = {
 						include_current_win = false,
 						autoselect_one = true,
@@ -11,10 +23,21 @@ require("window-picker").setup({
 						},
 					},
 				})
-
-vim.keymap.set("n","<leader>e", ":Neotree toggle position=left<CR>", {silent = true, desc = "Left File Explorer" })
-
-require("neo-tree").setup({
+			end,
+			keys = {
+				{ "<leader>w", ":Neotree toggle float<CR>", silent = true, desc = "Float File Explorer" },
+				{ "<leader>e", ":Neotree toggle position=left<CR>", silent = true, desc = "Left File Explorer" },
+				{
+					"<leader>gns",
+					":Neotree float git_status<CR>",
+					silent = true,
+					desc = "Neotree Open Git Status Window",
+				},
+			},
+		},
+	},
+	config = function()
+		require("neo-tree").setup({
 			close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 			popup_border_style = "rounded",
 			enable_git_status = true,
@@ -264,5 +287,29 @@ require("neo-tree").setup({
 					},
 				},
 			},
+			git_status = {
+				window = {
+					position = "float",
+					mappings = {
+						["A"] = "git_add_all",
+						["gu"] = "git_unstage_file",
+						["ga"] = "git_add_file",
+						["gr"] = "git_revert_file",
+						["gc"] = "git_commit",
+						["gp"] = "git_push",
+						["gg"] = "git_commit_and_push",
+						["o"] = { "show_help", nowait = false, config = { title = "Order by", prefix_key = "o" } },
+						["oc"] = { "order_by_created", nowait = false },
+						["od"] = { "order_by_diagnostics", nowait = false },
+						["om"] = { "order_by_modified", nowait = false },
+						["on"] = { "order_by_name", nowait = false },
+						["os"] = { "order_by_size", nowait = false },
+						["ot"] = { "order_by_type", nowait = false },
+					},
+				},
+			},
 		})
 
+		vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
+	end,
+}
