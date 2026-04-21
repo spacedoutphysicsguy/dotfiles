@@ -98,7 +98,7 @@ require(themes[env_var_nvim_theme])
 -- Setup plugins
 require("plugins.aerial")
 require("plugins.alpha")
-require("plugins.autocompletion")
+-- require("plugins.autocompletion")
 require("plugins.bufferline")
 require("plugins.conform")
 require("plugins.database")
