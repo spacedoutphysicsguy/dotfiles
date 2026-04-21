@@ -1,5 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
+
 require("fidget").setup({
 	notification = {
 		window = {
@@ -7,7 +8,6 @@ require("fidget").setup({
 		},
 	},
 })
-
 require("lsp_signature").setup({
 	bind = true, -- Mandatory for the floating window
 	handler_opts = {
@@ -18,7 +18,33 @@ require("lsp_signature").setup({
 	padding = " ",
 })
 
-vim.api.nvim_create_autocmd("lspAttach", {
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+vim.lsp.config("*", { capabilities = capabilities })
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			completion = {
+				callSnippet = "Replace",
+			},
+			runtime = { version = "luaJIT" },
+			workspace = {
+				checkThirdParty = false,
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+			diagnostics = {
+				globals = { "vim" },
+				disable = { "missing-fields" },
+			},
+			format = {
+				enable = false,
+			},
+		},
+	},
+})
+
+vim.lsp.enable({ "lua_ls", "jsonls", "sqlls", "yamlls", "ty", "ruff", "bashls", "ltex", "texlab" })
+
+vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 	-- Create a function that lets us more easily define mappings specific LSP related items.
 	-- It sets the mode, buffer and description for us each time.
@@ -65,8 +91,8 @@ vim.api.nvim_create_autocmd("lspAttach", {
 		map("K", vim.lsp.buf.hover, "Hover Documentation")
 		map("L", vim.lsp.buf.signature_help, "Signature Help")
 		-- WARN: This is not Goto Definition, this is Goto Declaration.
-		--  For example, in C this would take you to the header
-		map("<leader>lD", vim.lsp.buf.declaration, "Goto [D]eclaration")
+		-- For example, in C this would take you to the header
+		-- map("<leader>lD", vim.lsp.buf.declaration, "Goto [D]eclaration")
 
 		map("<leader>lwa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 		map("<leader>lwr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
@@ -111,57 +137,3 @@ vim.api.nvim_create_autocmd("lspAttach", {
 		end
 	end,
 })
-
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-local servers = {
-	lua_ls = {
-		settings = {
-			Lua = {
-				completion = {
-					callSnippet = "Replace",
-				},
-				runtime = { version = "luaJIT" },
-				workspace = {
-					checkThirdParty = false,
-					library = vim.api.nvim_get_runtime_file("", true),
-				},
-				diagnostics = {
-					globals = { "vim" },
-					disable = { "missing-fields" },
-				},
-				format = {
-					enable = false,
-				},
-			},
-		},
-	},
-	ty = {},
-	ruff = {},
-	jsonls = {},
-	sqlls = {},
-	-- terraformls = {},
-	yamlls = {},
-	bashls = {},
-	shellcheck = {},
-	ltex = {},
-	texlab = {},
-}
-
--- Ensure the servers and tools above are installed
-local ensure_installed = vim.tbl_keys(servers or {})
-vim.list_extend(ensure_installed, {
-	"stylua", -- Used to format Lua code
-})
-require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-for server, cfg in pairs(servers) do
-	-- For each LSP server (cfg), we merge:
-	-- 1. A fresh empty table (to avoid mutating capabilities globally)
-	-- 2. Your capabilities object with Neovim + cmp features
-	-- 3. Any server-specific cfg.capabilities if defined in `servers`
-	cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
-
-	vim.lsp.config(server, cfg)
-	vim.lsp.enable(server)
-end
