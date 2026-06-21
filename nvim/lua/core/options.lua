@@ -34,11 +34,11 @@ vim.o.backspace = "indent,eol,start" -- allow backspace on
 vim.o.fileencoding = "utf-8" -- the encoding written to a file
 vim.o.cmdheight = 1 -- more space in the neovim command line for displaying messages
 vim.o.autoindent = true -- copy indent from current line when starting new one
-vim.o.autocomplete = true -- native autocompletion from 0.12 onwards apparently
-vim.o.complete = "o,.,w,b,u"
-vim.o.completeopt = "fuzzy,menuone,noselect,popup,preview"
-vim.o.pumheight = 7
-vim.o.pummaxwidth = 80
+-- vim.o.autocomplete = true -- native autocompletion from 0.12 onwards apparently
+-- vim.o.complete = "o,.,w,b,u"
+-- vim.o.completeopt = "fuzzy,menuone,noselect,popup,preview"
+-- vim.o.pumheight = 7
+-- vim.o.pummaxwidth = 80
 vim.o.wildmode = "noselect:lastused,full"
 vim.o.wildoptions = "pum"
 -- vim.opt.shortmess:append("c") -- don't give |ins-completion-menu| messages

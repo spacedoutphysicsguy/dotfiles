@@ -16,9 +16,8 @@ vim.pack.add({
 	{ src = "https://github.com/goolord/alpha-nvim" },
 	-- Blink/autocompletion
 	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.x") },
-	-- {src= "https://github.com/saghen/blink.cmp", version= 'v1'},
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
-	-- {src= "https://github.com/L3MON4D3/LuaSnip"},
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	-- Bufferline
 	{ src = "https://github.com/akinsho/bufferline.nvim" },
 	{ src = "https://github.com/moll/vim-bbye" },
@@ -82,9 +81,13 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 	-- Themes
 	{ src = "https://github.com/navarasu/onedark.nvim", name = "onedark" },
+	-- Vimtex
+	{ src = "https://github.com/lervag/vimtex" },
 	-- Whichkey
 	{ src = "https://github.com/folke/which-key.nvim" },
 })
+-- Default undotree
+vim.cmd("packadd nvim.undotree")
 
 -- Import color theme based on environment variable NVIM_THEME
 local default_color_scheme = "onedark"
@@ -98,7 +101,7 @@ require(themes[env_var_nvim_theme])
 -- Setup plugins
 require("plugins.aerial")
 require("plugins.alpha")
--- require("plugins.autocompletion")
+require("plugins.autocompletion")
 require("plugins.bufferline")
 require("plugins.conform")
 require("plugins.database")
@@ -112,7 +115,9 @@ require("plugins.python")
 require("plugins.oil")
 require("plugins.telescope")
 require("plugins.treesitter")
+require("plugins.vimtex")
 require("plugins.whichkey")
+
 -- }, {
 -- 	ui = {
 -- 		-- If you have a Nerd Font, set icons to an empty table which will use the
@@ -134,26 +139,6 @@ require("plugins.whichkey")
 -- 		},
 -- 	},
 -- })
-
--- Function to check if a file exists
-local function file_exists(file)
-	local f = io.open(file, "r")
-	if f then
-		f:close()
-		return true
-	else
-		return false
-	end
-end
-
--- Path to the session file
-local session_file = ".session.vim"
-
--- Check if the session file exists in the current directory
-if file_exists(session_file) then
-	-- Source the session file
-	vim.cmd("source " .. session_file)
-end
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

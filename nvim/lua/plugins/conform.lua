@@ -4,7 +4,7 @@ require("mason-tool-installer").setup({ ensure_installed = formatters })
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		python = { "ruff_format", "ruff_fix" },
+		python = { "ruff_organize_imports", "ruff_format", "ruff_fix" },
 		sh = { "shfmt" },
 		zsh = { "shfmt" },
 		bash = { "shfmt" },
@@ -13,6 +13,7 @@ require("conform").setup({
 		time_out_ms = 2000,
 		lsp_format = "fallback",
 	},
+	notify_on_error = true,
 })
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 -- 	pattern = "*",

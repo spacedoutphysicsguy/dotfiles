@@ -30,8 +30,18 @@ vim.keymap.set("n", "<leader>sq", function()
 end, { desc = "[S]ave and [Q]uit" })
 
 -- Save and load session
-vim.keymap.set("n", "<leader>ss", ":mksession! .session.vim<CR>", { noremap = true, silent = false, desc= "[S]ave [S]ession" })
-vim.keymap.set("n", "<leader>sl", ":source .session.vim<CR>", { noremap = true, silent = false , desc= "[L]oad [S]ession"})
+vim.keymap.set(
+	"n",
+	"<leader>ss",
+	":mksession! .session.vim<CR>",
+	{ noremap = true, silent = false, desc = "[S]ave [S]ession" }
+)
+vim.keymap.set(
+	"n",
+	"<leader>sl",
+	":source .session.vim<CR>",
+	{ noremap = true, silent = false, desc = "[L]oad [S]ession" }
+)
 
 -- quit file
 vim.keymap.set("n", "<leader>qq", "<cmd> q <CR>", opts)
@@ -108,7 +118,10 @@ vim.keymap.set("v", "<A-k>", ":m .-2<CR>==", opts)
 vim.keymap.set("v", "p", '"_dP', opts)
 
 -- Replace word under cursor and add to search register
-vim.keymap.set("n", "<leader>j", "*``cgn", opts)
+-- vim.keymap.set("n", "<leader>j", "*``cgn", opts)
+
+-- Open undotree
+vim.keymap.set("n", "<leader>u", ":Undotree<CR>", opts)
 
 -- Explicitly yank to system clipboard (highlighted and entire row)
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
