@@ -141,11 +141,11 @@ vim.keymap.set("n", "<leader>df", function()
 end, { desc = "Toggle [D]iagnostics" })
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "dp", function()
+vim.keymap.set("n", "<leader>dp", function()
 	vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Go to previous diagnostic message" })
 
-vim.keymap.set("n", "dn", function()
+vim.keymap.set("n", "<leader>dn", function()
 	vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Go to next diagnostic message" })
 
