@@ -1,4 +1,4 @@
--- Keymaps for better default experience
+-- keymaps for better default experience
 
 -- Set leader key
 vim.g.mapleader = " "
@@ -152,10 +152,40 @@ end, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>dc", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
-vim.keymap.set("v", "<leader>far", function()
-	vim.cmd('normal! "zy')
-	local text = vim.fn.escape(vim.fn.getreg("z"), [[\/.*$^~[]])
-	vim.fn.feedkeys(":%s/\\V" .. text .. "//g" .. string.rep(vim.keycode("<Left>"), 2))
+local function replace_all(find)
+	if not find or find == "" then
+		return
+	end
+
+	local replace = vim.fn.input("Replace with: ")
+
+	-- \V = treat the search as literal text.
+	-- Still need to escape \ and the / delimiter.
+	local escaped_find = vim.fn.escape(find, [[\/]])
+
+	-- These have special meaning in the replacement string.
+	local escaped_replace = vim.fn.escape(replace, [[\/&~]])
+
+	vim.cmd("%s/\\V" .. escaped_find .. "/" .. escaped_replace .. "/ge")
+end
+
+-- Normal mode:
+-- ask for find text, then replacement text.
+vim.keymap.set("n", "<leader>far", function()
+	local find = vim.fn.input("Find: ")
+	replace_all(find)
 end, {
-	desc = "Replace selected text in file",
+	desc = "[F]ind [A]nd [R]eplace in file",
+})
+
+-- Visual mode:
+-- use selected text as the find text,
+-- then ask only for the replacement.
+vim.keymap.set("x", "<leader>far", function()
+	vim.cmd([[normal! "zy]])
+	local find = vim.fn.getreg("z")
+
+	replace_all(find)
+end, {
+	desc = "[F]ind [A]nd [R]eplace in file",
 })
