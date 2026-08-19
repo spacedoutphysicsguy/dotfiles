@@ -151,3 +151,11 @@ end, { desc = "Go to next diagnostic message" })
 
 vim.keymap.set("n", "<leader>dc", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+
+vim.keymap.set("v", "<leader>far", function()
+	vim.cmd('normal! "zy')
+	local text = vim.fn.escape(vim.fn.getreg("z"), [[\/.*$^~[]])
+	vim.fn.feedkeys(":%s/\\V" .. text .. "//g" .. string.rep(vim.keycode("<Left>"), 2))
+end, {
+	desc = "Replace selected text in file",
+})
